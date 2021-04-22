@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*;
 
-public class Register {
+public class Payee {
 	
 			//A common method to connect to the DB
 			private Connection connect() 
@@ -28,7 +28,7 @@ public class Register {
 						return con; 
 				}
 			
-			public String insertItem(String fname, String lname, String emailadd, String pass) 
+			public String insertItem(int accID,String type, String noc, String cn, String ed,String cvv) 
 			{ 
  
 				String output = ""; 
@@ -43,17 +43,18 @@ public class Register {
 					{return "Error while connecting to the database for inserting."; } 
  
 					// create a prepared statement
-					String query = " insert into accounts (`accountID`,`firstName`,`lastName`,`email`,`password`)"
-								+ " values (?, ?, ?, ?, ?)"; 
+					String query = " insert into carddetails (`accountId`,`cardType`,`nameOnCard`,`cardNo`,`expireDate`,`cvv`)"
+								+ " values (?, ?, ?, ?, ?, ?)"; 
  
 					PreparedStatement preparedStmt = con.prepareStatement(query); 
 					
 					// binding values
-					 preparedStmt.setInt(1, 0); 
-					 preparedStmt.setString(2, fname); 
-					 preparedStmt.setString(3, lname); 
-					 preparedStmt.setString(4, emailadd); 
-					 preparedStmt.setString(5, pass); 
+					 preparedStmt.setInt(1, accID); 
+					 preparedStmt.setString(2, type); 
+					 preparedStmt.setString(3, noc); 
+					 preparedStmt.setString(4, cn); 
+					 preparedStmt.setString(5, ed);
+					 preparedStmt.setString(6, cvv);
 
 					 // execute the statement
 					 preparedStmt.execute(); 
@@ -85,28 +86,33 @@ public class Register {
 						{return "Error while connecting to the database for reading."; } 
 			 
 						// Prepare the html table to be displayed
-						output = "<table border='1'><tr><th>AccountID</th><th>First Name</th>" +
-								"<th>Last Name</th>" + 
-								"<th>Email</th></tr>"; 
+						output = "<table border='1'><tr><th>AccountID</th><th>Card Type</th>" +
+								"<th>Name On Card</th>" + 
+								"<th>Card No</th>" +
+								"<th>Expire Date</th>" +
+								"<th>CVV</th></tr>"; 
 			 
-						String query = "select * from accounts"; 
+						String query = "select * from carddetails"; 
 						Statement stmt = con.createStatement(); 
 						ResultSet rs = stmt.executeQuery(query); 
 			 
 						// iterate through the rows in the result set
 						while (rs.next()) 
 						{ 
-								String accountID = Integer.toString(rs.getInt("accountID")); 
-								String firstName = rs.getString("firstName"); 
-								String lastName = rs.getString("lastName"); 
-								String email = rs.getString("email"); 
-								String password = rs.getString("password"); 
+								String accountID = Integer.toString(rs.getInt("accountId")); 
+								String cardType = rs.getString("cardType"); 
+								String nameOnCard = rs.getString("nameOnCard"); 
+								String cardNo = rs.getString("cardNo"); 
+								String expireDate = rs.getString("expireDate");
+								String cvv = rs.getString("cvv");
 			 
 								// Add into the html table
 								output += "<tr><td>" + accountID + "</td>"; 
-								output += "<td>" + firstName + "</td>"; 
-								output += "<td>" + lastName + "</td>"; 
-								output += "<td>" + email + "</td></tr>"; 
+								output += "<td>" + cardType + "</td>"; 
+								output += "<td>" + nameOnCard + "</td>"; 
+								output += "<td>" + cardNo + "</td>";
+								output += "<td>" + expireDate + "</td>";
+								output += "<td>" + cvv + "</td></tr>"; 
 						} 
 			 
 						con.close(); 
@@ -123,7 +129,7 @@ public class Register {
 					return output; 
 		} 
 			
-			public String updateItem(String ID, String fName, String lName, String emailadd, String pass)
+			public String updateItem(String ID, String type, String noc, String cn, String ed,String cvv)
 			{ 
 				 String output = ""; 
 				 
@@ -136,16 +142,17 @@ public class Register {
 					 	{return "Error while connecting to the database for updating."; } 
 				 
 					 	// create a prepared statement
-					 	String query = "UPDATE accounts SET firstName=?,lastName=?,email=?,password=? WHERE accountID=?"; 
+					 	String query = "UPDATE carddetails SET cardType=?,nameOnCard=?,cardNo=?,expireDate=?,cvv=? WHERE accountId=?"; 
 				 
 					 	PreparedStatement preparedStmt = con.prepareStatement(query); 
 				 
 					 	// binding values
-					 	preparedStmt.setString(1, fName); 
-					 	preparedStmt.setString(2, lName); 
-					 	preparedStmt.setString(3, emailadd);
-					 	preparedStmt.setString(4, pass); 
-					 	preparedStmt.setInt(5, Integer.parseInt(ID)); 
+					 	preparedStmt.setString(1, type); 
+					 	preparedStmt.setString(2, noc); 
+					 	preparedStmt.setString(3, cn);
+					 	preparedStmt.setString(4, ed);
+					 	preparedStmt.setString(5, cvv);
+					 	preparedStmt.setInt(6, Integer.parseInt(ID)); 
 				 
 					 	// execute the statement
 					 	preparedStmt.execute(); 
@@ -159,7 +166,7 @@ public class Register {
 					 	System.err.println(e.getMessage()); 
 				 } 
 				 return output; 
-		}	
+		}
 			
 			public String deleteItem(String accountID)
 			{ 
@@ -174,7 +181,7 @@ public class Register {
 			 			{return "Error while connecting to the database for deleting."; } 
 			 
 			 			// create a prepared statement
-			 			String query = "delete from accounts where accountID=?"; 
+			 			String query = "delete from carddetails where accountId=?"; 
 			 			
 			 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 			 

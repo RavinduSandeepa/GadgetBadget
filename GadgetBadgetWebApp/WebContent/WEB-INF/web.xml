@@ -9,6 +9,8 @@
 		<servlet-mapping>
  			<servlet-name>Jersey Web Application</servlet-name>
  			<url-pattern>/RegistrationService/*</url-pattern>
+ 			<url-pattern>/PaymentService/*</url-pattern>
+ 			<url-pattern>/ShippingService/*</url-pattern>
 		</servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
