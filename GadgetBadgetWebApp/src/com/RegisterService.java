@@ -15,13 +15,13 @@ import org.jsoup.*;
 import org.jsoup.parser.*; 
 import org.jsoup.nodes.Document; 
 
-@Path("/Registration") 
+@Path("/Register") 
 public class RegisterService {
 	
 		Register regObj = new Register();
 	
 		@GET
-		@Path("/") 
+		@Path("/getAcc") 
 		@Produces(MediaType.TEXT_HTML) 
 		public String readItems() 
 		{ 
@@ -30,7 +30,7 @@ public class RegisterService {
 		}
 		
 		@POST
-		@Path("/") 
+		@Path("/addAcc") 
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 		@Produces(MediaType.TEXT_PLAIN) 
 		public String insertItem(@FormParam("firstName") String firstName, 
@@ -43,7 +43,7 @@ public class RegisterService {
 		}
 		
 		@PUT
-		@Path("/") 
+		@Path("/updateAcc") 
 		@Consumes(MediaType.APPLICATION_JSON) 
 		@Produces(MediaType.TEXT_PLAIN) 
 		public String updateItem(String itemData) 
@@ -64,7 +64,7 @@ public class RegisterService {
 		}
 		
 		@DELETE
-		@Path("/") 
+		@Path("/deleteAcc") 
 		@Consumes(MediaType.APPLICATION_XML) 
 		@Produces(MediaType.TEXT_PLAIN) 
 		public String deleteItem(String itemData) 

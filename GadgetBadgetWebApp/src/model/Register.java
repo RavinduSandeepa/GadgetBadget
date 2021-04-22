@@ -101,7 +101,7 @@ public class Register {
 								String firstName = rs.getString("firstName"); 
 								String lastName = rs.getString("lastName"); 
 								String email = rs.getString("email"); 
-								String password = rs.getString("itemDesc"); 
+								String password = rs.getString("password"); 
 			 
 								// Add into the html table
 								output += "<tr><td>" + accountID + "</td>"; 
