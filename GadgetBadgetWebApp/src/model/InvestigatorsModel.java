@@ -3,7 +3,7 @@ package model;
 import java.sql.*;
 public class InvestigatorsModel {
 
-	//A common method to connect to the DB
+	///A common method to connect to the DB
 		private Connection connect() 
 			{ 
 		
@@ -11,10 +11,10 @@ public class InvestigatorsModel {
 		
 					try
 					{ 
-						//Class.forName("com.mysql.jdbc.Driver"); 
+						///Class.forName("com.mysql.jdbc.Driver"); 
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						
-						//Provide the correct details: DBServer/DBName, username, password 
+						///Provide the correct details: DBServer/DBName, username, password 
 						con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/investigators", "root", "");
 						
 						
@@ -41,13 +41,15 @@ public class InvestigatorsModel {
 
 				{return "Error while connecting to the database for inserting."; } 
 
-				// create a prepared statement
+				// creating a prepared statement
+				
 				String query = " insert into investigatorss (`InvestID`,`FirstName`,`LastName`,`Email`,`ContactNumber`,`Location`)"
 							+ " values (?, ?, ?, ?, ?,?)"; 
 
 				PreparedStatement preparedStmt = con.prepareStatement(query); 
 				
-				// binding values
+				 /// binding values
+				
 				 preparedStmt.setInt(1, 0); 
 				 preparedStmt.setString(2, Fname); 
 				 preparedStmt.setString(3, Lname); 
@@ -55,7 +57,8 @@ public class InvestigatorsModel {
 				 preparedStmt.setString(5, contact); 
 				 preparedStmt.setString(6, location); 
 
-				 // execute the statement
+				 /// executing the statement
+				 
 				 preparedStmt.execute(); 
 				 con.close(); 
 				 
@@ -84,19 +87,21 @@ public class InvestigatorsModel {
 					if (con == null) 
 					{return "Error while connecting to the database for reading."; } 
 		 
-					// Prepare the html table to be displayed
+					/// Prepare the html table to be display
+					
 					output = "<table border='1'><tr><th>InvestID</th><th>First Name</th>" +
 							"<th>Last Name</th>" + 
 							"<th>Email</th>" +
 							"<th>ContactNumber</th>" +
 							"<th>Location</th>" +
-							"<th>Update</th><th>Remove</th></tr>"; 
+							"</tr>"; 
 		 
 					String query = "select * from investigatorss"; 
 					Statement stmt = con.createStatement(); 
 					ResultSet rs = stmt.executeQuery(query); 
 		 
-					// iterate through the rows in the result set
+					/// iterate through the rows in the result set
+					
 					while (rs.next()) 
 					{ 
 							String InvestID = Integer.toString(rs.getInt("InvestID")); 
@@ -106,7 +111,8 @@ public class InvestigatorsModel {
 							String ContactNumber = rs.getString("ContactNumber");
 							String Location = rs.getString("Location"); 
 		 
-							// Add into the html table
+							// Add data into the html table
+							
 							output += "<tr><td>" + InvestID + "</td>"; 
 							output += "<td>" + FirstName + "</td>"; 
 							output += "<td>" + LastName + "</td>"; 
@@ -114,17 +120,13 @@ public class InvestigatorsModel {
 							output += "<td>" + ContactNumber + "</td>"; 
 							output += "<td>" + Location + "</td>"; 
 		 
-							// buttons
-							output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-									+ "<td><form method='post' action='registration.jsp'>"
-									+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-									+ "<input name='InvestID' type='hidden' value='" + InvestID 
-									+ "'>" + "</form></td></tr>"; 
+							
 					} 
 		 
 					con.close(); 
 		 
-					// Complete the html table
+					// Complete the html table .
+					
 					output += "</table>"; 
 		 } 
 		 catch (Exception e) 
@@ -148,12 +150,13 @@ public class InvestigatorsModel {
 				 	if (con == null) 
 				 	{return "Error while connecting to the database for updating."; } 
 			 
-				 	// create a prepared statement
+				 	// create a prepared statement .
+				 	
 				 	String query = "UPDATE investigatorss SET FirstName=?,LastName=?,Email=?,ContactNumber=?,Location=? WHERE InvestID=?"; 
 			 
 				 	PreparedStatement preparedStmt = con.prepareStatement(query); 
 			 
-				 	// binding values
+				 	// binding values.
 				 	 
 					 preparedStmt.setString(1, Fname); 
 					 preparedStmt.setString(2, Lname); 
@@ -162,7 +165,8 @@ public class InvestigatorsModel {
 					 preparedStmt.setString(5, location); 
 				 	preparedStmt.setInt(6, Integer.parseInt(ID)); 
 			 
-				 	// execute the statement
+				 	// execute the statement.
+				 	
 				 	preparedStmt.execute(); 
 				 	con.close(); 
 			 
@@ -188,15 +192,18 @@ public class InvestigatorsModel {
 		 			if (con == null) 
 		 			{return "Error while connecting to the database for deleting."; } 
 		 
-		 			// create a prepared statement
+		 			// create a prepared statement.
+		 			
 		 			String query = "delete from investigatorss where InvestID=?"; 
 		 			
 		 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 		 
-		 			// binding values
+		 			// binding values.
+		 			
 		 			preparedStmt.setInt(1, Integer.parseInt(InvestID)); 
 		 
-		 			// execute the statement
+		 			// execute the statement.
+		 			
 		 			preparedStmt.execute(); 
 		 			con.close(); 
 		 

@@ -58,10 +58,12 @@ import model.InvestigatorsModel;
 		@Produces(MediaType.TEXT_PLAIN) 
 		public String updateItem(String ivestData) 
 		{ 
-				//Convert the input string to a JSON object 
+				///Convert the input string to a JSON object . 
+			
 				JsonObject itemObject = new JsonParser().parse(ivestData).getAsJsonObject(); 
 		
-				//Read the values from the JSON object
+				///Read the values from the JSON object .
+				
 				String InvestID = itemObject.get("InvestID").getAsString(); 
 				String FirstName = itemObject.get("FirstName").getAsString(); 
 				String LastName = itemObject.get("LastName").getAsString(); 
@@ -80,10 +82,12 @@ import model.InvestigatorsModel;
 		@Produces(MediaType.TEXT_PLAIN) 
 		public String deleteItem(String itemData) 
 		{ 
-				//Convert the input string to an XML document
+				///Convert the input string to an XML document.
+			
 				Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
 		 
-				//Read the value from the element <itemID>
+				///Read the value from the element <itemID> .
+				
 				String InvestID = doc.select("InvestID").text(); 
 		 
 				String output = invObj.deleteItem(InvestID); 
