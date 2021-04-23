@@ -152,8 +152,9 @@ public class SellerModel {
 				 	String query = "UPDATE sellerss SET FirstName=?,LastName=?,Email=?,ContactNumber=?,CompanyName=? WHERE SellersId=?"; 
 			 
 				 	PreparedStatement preparedStmt = con.prepareStatement(query); 
+				 	
 			 
-				 	// binding values
+				 	// binding values .
 				 	 
 					 preparedStmt.setString(1, Fname); 
 					 preparedStmt.setString(2, Lname); 

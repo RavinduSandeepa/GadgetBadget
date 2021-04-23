@@ -61,7 +61,7 @@ import model.SellerModel;
 				//Convert the input string to a JSON object 
 				JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
 		
-				//Read the values from the JSON object
+				//Read the values from the JSON object .
 				String SellersId = itemObject.get("SellersId").getAsString(); 
 				String FirstName = itemObject.get("FirstName").getAsString(); 
 				String LastName = itemObject.get("LastName").getAsString(); 
