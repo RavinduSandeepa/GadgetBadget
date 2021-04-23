@@ -148,7 +148,8 @@ public class SellerModel {
 				 	if (con == null) 
 				 	{return "Error while connecting to the database for updating."; } 
 			 
-				 	// create a prepared statement
+				 	// create a prepared statement.
+				 	
 				 	String query = "UPDATE sellerss SET FirstName=?,LastName=?,Email=?,ContactNumber=?,CompanyName=? WHERE SellersId=?"; 
 			 
 				 	PreparedStatement preparedStmt = con.prepareStatement(query); 
@@ -163,7 +164,8 @@ public class SellerModel {
 					 preparedStmt.setString(5, Companyname); 
 				 	preparedStmt.setInt(6, Integer.parseInt(ID)); 
 			 
-				 	// execute the statement
+				 	// execute the statement.
+				 	
 				 	preparedStmt.execute(); 
 				 	con.close(); 
 			 
