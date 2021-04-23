@@ -118,7 +118,7 @@ public class InvestigatorsModel {
 							output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
 									+ "<td><form method='post' action='registration.jsp'>"
 									+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-									+ "<input name='accountID' type='hidden' value='" + InvestID 
+									+ "<input name='InvestID' type='hidden' value='" + InvestID 
 									+ "'>" + "</form></td></tr>"; 
 					} 
 		 
@@ -179,7 +179,7 @@ public class InvestigatorsModel {
 		public String deleteItem(String InvestID)
 		{ 
 		 	String output = ""; 
-		 
+		  
 		 	try
 		 	{ 
 		 
