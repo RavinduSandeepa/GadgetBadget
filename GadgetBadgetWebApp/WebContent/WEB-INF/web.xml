@@ -11,7 +11,6 @@
  			<url-pattern>/RegistrationService/*</url-pattern>
  			<url-pattern>/PaymentService/*</url-pattern>
  			<url-pattern>/ShippingService/*</url-pattern>
- 			<url-pattern>/SellerService/*</url-pattern>
 		</servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

@@ -16,7 +16,7 @@ public class Payee {
 							Class.forName("com.mysql.cj.jdbc.Driver");
 							
 							//Provide the correct details: DBServer/DBName, username, password 
-							con = DriverManager.getConnection("jdbc:mysql://localhost:3306/accountsdb","root","ravinduc3303");
+							con = DriverManager.getConnection("jdbc:mysql://localhost:3306/accountsdb","root","");
 							
 							//con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test", "root", "");
 						} 
