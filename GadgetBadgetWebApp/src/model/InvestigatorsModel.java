@@ -192,7 +192,7 @@ public class InvestigatorsModel {
 		 			if (con == null) 
 		 			{return "Error while connecting to the database for deleting."; } 
 		 
-		 			// create a prepared statement...
+		 			// create a prepared statement....
 		 			
 		 			String query = "delete from investigatorss where InvestID=?"; 
 		 			
