@@ -87,7 +87,7 @@ public class Feedback
 		 String FeedBack = rs.getString("FeedBack"); 
 		
 		 // Add into the html table
-		 output += "<tr><td>" + FID + "</td>"; 
+		
 		 output += "<td>" + CustomerID + "</td>"; 
 		 output += "<td>" + FeedbackID + "</td>"; 
 		 output += "<td>" + FeedBack + "</td>"; 
