@@ -22,7 +22,7 @@ import org.jsoup.nodes.Document;
 
 
 
-///has/////////
+///has////////
 
 @Path("/Feedbacks")//@Path annotation is used to bind URI pattern to a Java method. 
 public class FeedbackService { 
@@ -45,10 +45,11 @@ public class FeedbackService {
 	@Produces(MediaType.TEXT_PLAIN) 
 	
 	public String insertItem(@FormParam("FeedbackID") String FeedbackID, 
+	@FormParam("CustomerID") String CustomerID, 
 	 
 	 @FormParam("FeedBack") String FeedBack) 
 	{ 
-	 String output = fedobj.insertItem(FeedbackID,FeedBack); 
+	 String output = fedobj.insertItem(FeedbackID,CustomerID,FeedBack); 
 	return output; 
 	}
 

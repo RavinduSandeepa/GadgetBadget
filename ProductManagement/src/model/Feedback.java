@@ -31,7 +31,7 @@ public class Feedback
 		 return con; 
 	 } 
 	
-	public String insertItem(String code, String name) 
+	public String insertItem(String cusID,String feedID, String feedback) 
 	 { 
 		 String output = ""; 
 		 try
@@ -40,12 +40,13 @@ public class Feedback
 		 if (con == null) 
 		 {return "Error while connecting to the database for inserting."; } 
 		 // create a prepared statement
-		 String query = " insert into feedback (`FID`,`FeedbackID`,`FeedBack`)"+ " values (?, ?, ?)"; 
+		 String query = " insert into feedback (`FID`,`CustomerID`,`FeedbackID`,`FeedBack`)"+ " values (?, ?, ?)"; 
 		 PreparedStatement preparedStmt = con.prepareStatement(query); 
 		 // binding values
 		 preparedStmt.setInt(1, 0); 
-		 preparedStmt.setString(2, code); 
-		 preparedStmt.setString(3, name); 
+		 preparedStmt.setString(2, cusID); 
+		 preparedStmt.setString(3, feedID); 
+		 preparedStmt.setString(4, feedback); 
 		// preparedStmt.setDouble(4, Double.parseDouble(price)); 
 		 //preparedStmt.setString(5, desc); 
 		// execute the statement3
@@ -81,11 +82,13 @@ public class Feedback
 		 while (rs.next()) 
 		 { 
 		 String FID = Integer.toString(rs.getInt("FID")); 
+		 String CustomerID = rs.getString("CustomerID"); 
 		 String FeedbackID = rs.getString("FeedbackID"); 
 		 String FeedBack = rs.getString("FeedBack"); 
 		
 		 // Add into the html table
 		 output += "<tr><td>" + FID + "</td>"; 
+		 output += "<td>" + CustomerID + "</td>"; 
 		 output += "<td>" + FeedbackID + "</td>"; 
 		 output += "<td>" + FeedBack + "</td>"; 
 		 
