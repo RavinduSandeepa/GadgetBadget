@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*; 
 
-///
+////
 public class Item 
 { //A common method to connect to the DB
 	private Connection connect() 
