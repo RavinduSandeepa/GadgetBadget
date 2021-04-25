@@ -19,10 +19,12 @@ import org.jsoup.*;
 import org.jsoup.parser.*; 
 import org.jsoup.nodes.Document; 
 
+/**
+ * @author Hasantha
+ *
+ */
 
 
-
-///has////////
 
 @Path("/Feedbacks")//@Path annotation is used to bind URI pattern to a Java method. 
 public class FeedbackService { 
@@ -36,25 +38,25 @@ public class FeedbackService {
 		 return fedobj.readItems();
 	 } 
 	
-	
-/////
+	  //
+
 	 
 	@POST//used to update resource available on the server.
 	@Path("/") //@Path annotation is used to bind URI pattern to a Java method.
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) //@Consumes all the response methods accept the specified MIME types by default.
 	@Produces(MediaType.TEXT_PLAIN) 
 	
-	public String insertItem(@FormParam("FeedbackID") String FeedbackID, 
-	@FormParam("CustomerID") String CustomerID, 
+	public String insertItem(@FormParam("CustomerID") String CustomerID, 
 	 
-	 @FormParam("FeedBack") String FeedBack) 
+	 @FormParam("ItemID") String ItemID, @FormParam("FeedbackID") String FeedbackID, @FormParam("FeedBack") String FeedBack) 
 	{ 
-	 String output = fedobj.insertItem(FeedbackID,CustomerID,FeedBack); 
+	 String output = fedobj.insertItem(CustomerID,ItemID,FeedbackID,FeedBack); 
 	return output; 
 	}
 
 	
-
+  
+	
 	@PUT//used to update resource available on the server.
 	@Path("/") //@Path annotation is used to bind URI pattern to a Java method.
 	@Consumes(MediaType.APPLICATION_JSON) //@Consumes all the response methods accept the specified MIME types by default.
@@ -84,8 +86,8 @@ public class FeedbackService {
 	 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); //Convert the input string to an XML document
 	 
 	
-	 String RefID = doc.select("FID").text(); //Read the value from the element <itemID>
-	 String output = fedobj.deleteItem(RefID); 
+	 String FID = doc.select("FID").text(); //Read the value from the element <itemID>
+	 String output = fedobj.deleteItem(FID); 
 	return output; 
 	}
 

@@ -59,7 +59,8 @@ public class Item
 		 if (con == null) 
 		 {return "Error while connecting to the database for reading."; } 
 		 // Prepare the html table to be displayed
-		 output = "<table border='1'><tr><th>Item Code</th><th>Item Name</th>" +
+		 output = "<table border='1'><tr><th>Item ID</th>        <th>Item Code</th>" +
+				"<th>Item Name</th>"  +
 		 "<th>Item Price</th>" + 
 		 "<th>Item Description</th>" +
 		 "<th>Update</th><th>Remove</th></tr>"; 
@@ -76,7 +77,8 @@ public class Item
 		 String itemPrice = Double.toString(rs.getDouble("itemPrice")); 
 		 String itemDesc = rs.getString("itemDesc"); 
 		 // Add into the html table
-		 output += "<tr><td>" + itemCode + "</td>"; 
+		 output += "<tr><td>" + itemID + "</td>"; 
+		 output += "<td>" + itemCode + "</td>";
 		 output += "<td>" + itemName + "</td>"; 
 		 output += "<td>" + itemPrice + "</td>"; 
 		 output += "<td>" + itemDesc + "</td>"; 
@@ -84,8 +86,8 @@ public class Item
 		 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
 		 + "<td><form method='post' action='items.jsp'>"
 		+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-		 + "<input name='itemID' type='hidden' value='" + itemID 
-		 + "'>" + "</form></td></tr>"; 
+		
+		 + "</form></td></tr>"; 
 		 } 
 		 con.close(); 
 		 // Complete the html table

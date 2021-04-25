@@ -7,6 +7,7 @@ package model;
  * @author Hasantha
  *
  */
+//
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,23 +16,23 @@ import java.sql.Statement;
 
 
 public class Feedback 
-{ //A common method to connect to the DB
-	private Connection connect() 
+{ 
+	private Connection connect() //method to connect to the DB
 	 { 
 		 Connection con = null; 
 		 try
 		 { 
 		 Class.forName("com.mysql.jdbc.Driver"); 
 		 
-		 //Provide the correct details: DBServer/DBName, username, password 
-		 con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/newdb", "root", ""); 
+		 
+		 con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/newdb", "root", ""); //create database connection 
 		 } 
 		 catch (Exception e) 
 		 {e.printStackTrace();} 
 		 return con; 
 	 } 
 	
-	public String insertItem(String cusID,String feedID, String feedback) 
+	public String insertItem(String code,String customerID,String itemID, String name) 
 	 { 
 		 String output = ""; 
 		 try
@@ -39,17 +40,15 @@ public class Feedback
 		 Connection con = connect(); 
 		 if (con == null) 
 		 {return "Error while connecting to the database for inserting."; } 
-		 // create a prepared statement
-		 String query = " insert into feedback (`FID`,`CustomerID`,`FeedbackID`,`FeedBack`)"+ " values (?, ?, ?)"; 
+		 
+		 String query = " insert into feedback (`FID`,`CustomerID`,`ItemID`,`FeedbackID`,`FeedBack`)"+ " values (?, ?, ?, ?, ?)"; // create a prepared statement
 		 PreparedStatement preparedStmt = con.prepareStatement(query); 
-		 // binding values
-		 preparedStmt.setInt(1, 0); 
-		 preparedStmt.setString(2, cusID); 
-		 preparedStmt.setString(3, feedID); 
-		 preparedStmt.setString(4, feedback); 
-		// preparedStmt.setDouble(4, Double.parseDouble(price)); 
-		 //preparedStmt.setString(5, desc); 
-		// execute the statement3
+		 
+		 preparedStmt.setInt(1, 0); // binding values
+		 preparedStmt.setString(2, code); 
+		 preparedStmt.setString(3, customerID); 
+		 preparedStmt.setString(4, itemID); 
+		 preparedStmt.setString(5, name); 
 		 preparedStmt.execute(); 
 		 con.close(); 
 		 output = "Inserted successfully"; 
@@ -70,30 +69,33 @@ public class Feedback
 		 Connection con = connect(); 
 		 if (con == null) 
 		 {return "Error while connecting to the database for reading."; } 
-		 // Prepare the html table to be displayed
-		 output = "<table border='1'><tr><th>CustomerID</th>"+"<th>FeedbackID</th>"+
-		 "<th>FeedBack</th>" + 
+		
+		 output = "<table border='1'><tr><th>FID</th>" + // Prepare the html table to be displayed
+				 "<th>CustomerID</th>" + 
+				  "<th>ItemID</th>"+"<th>FeedbackID</th>"+"<th>FeedBack</th>" +
 		 "<th>Update</th><th>Remove</th></tr>"; 
 		 
 		 String query = "select * from feedback"; 
 		 Statement stmt = con.createStatement(); 
 		 ResultSet rs = stmt.executeQuery(query); 
-		 // iterate through the rows in the result set
-		 while (rs.next()) 
+		 
+		 while (rs.next()) // iterate through the rows in the result set
 		 { 
 		 String FID = Integer.toString(rs.getInt("FID")); 
 		 String CustomerID = rs.getString("CustomerID"); 
+		 String ItemID = rs.getString("ItemID"); 
 		 String FeedbackID = rs.getString("FeedbackID"); 
 		 String FeedBack = rs.getString("FeedBack"); 
 		
-		 // Add into the html table
-		
-		 output += "<td>" + CustomerID + "</td>"; 
-		 output += "<td>" + FeedbackID + "</td>"; 
-		 output += "<td>" + FeedBack + "</td>"; 
 		 
-		 // buttons
-		 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+		 // Add into the html table
+		 output += "<tr><td>" + FID + "</td>"; 
+		 output += "<td>" + CustomerID + "</td>"; 
+		 output += "<td>" + ItemID + "</td>"; 
+		 output += "<td>" + FeedbackID+ "</td>"; 
+		 output += "<td>" + FeedBack + "</td>"; 
+	
+		 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"//designing buttons
 		 + "<td><form method='post' action='items.jsp'>"
 		+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
 		 + "<input name='FID' type='hidden' value='" + FID 
@@ -119,15 +121,14 @@ public class Feedback
 		 Connection con = connect(); 
 		 if (con == null) 
 		 {return "Error while connecting to the database for updating."; } 
-		 // create a prepared statement
+		 
 		 String query = "UPDATE feedback SET FeedBack=? WHERE FID=?"; 
-		 PreparedStatement preparedStmt = con.prepareStatement(query); 
-		 // binding values
+		 PreparedStatement preparedStmt = con.prepareStatement(query); // create a prepared statement
+		 
 		 
 	
-		 preparedStmt.setString(1, name); 
-		// preparedStmt.setInt(5, Integer.parseInt(ID)); 
-		 // execute the statement
+		 preparedStmt.setString(1, name);// binding values 
+	
 		 preparedStmt.execute(); 
 		 con.close(); 
 		 output = "Updated successfully"; 
@@ -148,13 +149,13 @@ public class Feedback
 		 Connection con = connect(); 
 		 if (con == null) 
 		 {return "Error while connecting to the database for deleting."; } 
-		 // create a prepared statement
+		 
 		 String query = "delete from feedback where FID=?"; 
-		 PreparedStatement preparedStmt = con.prepareStatement(query); 
-		 // binding values
-		 preparedStmt.setInt(1, Integer.parseInt(FID)); 
-		 // execute the statement
-		 preparedStmt.execute(); 
+		 PreparedStatement preparedStmt = con.prepareStatement(query); // create a prepared statement
+		 
+		 preparedStmt.setInt(1, Integer.parseInt(FID)); // binding values
+		
+		 preparedStmt.execute();  // execute the statement
 		 con.close(); 
 		 output = "Deleted successfully"; 
 		 } 
