@@ -125,7 +125,7 @@ public class Feedback
 		 String query = "UPDATE feedback SET FeedBack=? WHERE FID=?"; 
 		 PreparedStatement preparedStmt = con.prepareStatement(query); // create a prepared statement
 		 
-		 
+		// 
 	
 		 preparedStmt.setString(1, name);// binding values 
 		 preparedStmt.setInt(2, Integer.parseInt(ID)); 
