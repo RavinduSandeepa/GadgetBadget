@@ -67,10 +67,10 @@ public class FeedbackService {
 		
 	 JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); //Convert the input string to a JSON object 
 	
-
+	 String FID = itemObject.get("FID").getAsString(); 
 	 String FeedBack = itemObject.get("FeedBack").getAsString(); 
 	
-	 String output = fedobj.updateItem(FeedBack); 
+	 String output = fedobj.updateItem(FID,FeedBack); 
 	return output; 
 	}
 	

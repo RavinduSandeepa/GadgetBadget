@@ -113,7 +113,7 @@ public class Feedback
 		 return output; 
 	 }
 	
-	public String updateItem(String name)
+	public String updateItem(String ID,String name)
 	 { 
 		 String output = ""; 
 		 try
@@ -128,7 +128,7 @@ public class Feedback
 		 
 	
 		 preparedStmt.setString(1, name);// binding values 
-	
+		 preparedStmt.setInt(2, Integer.parseInt(ID)); 
 		 preparedStmt.execute(); 
 		 con.close(); 
 		 output = "Updated successfully"; 
