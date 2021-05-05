@@ -67,8 +67,8 @@ public class FeedbackService {
 	//	
 	 JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); //Convert the input string to a JSON object 
 	
-	 String FID = itemObject.get("FID").getAsString(); 
-	 String FeedBack = itemObject.get("FeedBack").getAsString(); 
+	 	String FID = itemObject.get("FID").getAsString(); 
+	 	String FeedBack = itemObject.get("FeedBack").getAsString(); 
 	
 	 String output = fedobj.updateItem(FID,FeedBack); 
 	return output; 
@@ -86,8 +86,8 @@ public class FeedbackService {
 	 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); //Convert the input string to an XML document
 	 
 	
-	 String FID = doc.select("FID").text(); //Read the value from the element <itemID>
-	 String output = fedobj.deleteItem(FID); 
+	 	String FID = doc.select("FID").text(); //Read the value from the element <itemID>
+	 	String output = fedobj.deleteItem(FID); 
 	return output; 
 	}
 
