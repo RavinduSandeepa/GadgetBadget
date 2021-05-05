@@ -52,12 +52,12 @@ public class ItemService
 	//Convert the input string to a JSON object 
 	 JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
 	//Read the values from the JSON object
-	 String itemID = itemObject.get("itemID").getAsString(); 
-	 String itemCode = itemObject.get("itemCode").getAsString(); 
-	 String itemName = itemObject.get("itemName").getAsString(); 
-	 String itemPrice = itemObject.get("itemPrice").getAsString(); 
-	 String itemDesc = itemObject.get("itemDesc").getAsString(); 
-	 String output = itemObj.updateItem(itemID, itemCode, itemName, itemPrice, itemDesc); 
+	 	String itemID = itemObject.get("itemID").getAsString(); 
+	 	String itemCode = itemObject.get("itemCode").getAsString(); 
+	 	String itemName = itemObject.get("itemName").getAsString(); 
+	 	String itemPrice = itemObject.get("itemPrice").getAsString(); 
+	 	String itemDesc = itemObject.get("itemDesc").getAsString(); 
+	 	String output = itemObj.updateItem(itemID, itemCode, itemName, itemPrice, itemDesc); 
 	return output; 
 	}
 	
@@ -72,8 +72,8 @@ public class ItemService
 	 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
 	 
 	//Read the value from the element <itemID>
-	 String itemID = doc.select("itemID").text(); 
-	 String output = itemObj.deleteItem(itemID); 
+	 	String itemID = doc.select("itemID").text(); 
+	 	String output = itemObj.deleteItem(itemID); 
 	return output; 
 	}
 
